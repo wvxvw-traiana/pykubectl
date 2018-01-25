@@ -1,0 +1,8 @@
+#!/usr/bin/env python3.6
+# -*- coding: utf-8; mode: python -*-
+
+import pprint
+from pykubectl import kubectl_get
+
+pp = pprint.PrettyPrinter(indent=4)
+pp.pprint(kubectl_get(None, ['pods']))
