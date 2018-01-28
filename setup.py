@@ -6,8 +6,8 @@ import re
 import shutil
 import subprocess
 
-from setuptools import setup, Extension
 from Cython.Distutils import build_ext
+from setuptools import setup, Extension
 from setuptools.command.build_py import build_py
 
 
@@ -20,6 +20,20 @@ class BuildGo(build_py):
     '''
 
     def run(self):
+        if self.stale_go():
+            print('Fresh Go build')
+            self.build_go()
+        else:
+            print('Using previously compiled Go library')
+        build_py.run(self)
+
+    def stale_go(self):
+        installed_lib = os.path.join(LIB_DIR, 'libgokubectl.so')
+        return (not os.path.isfile(installed_lib)) or \
+            os.path.getmtime(installed_lib) < \
+            os.path.getmtime('main/pykubectl.go')
+
+    def build_go(self):
         version = None
         refusal = 'Will not compile Go bindings'
         try:
@@ -56,22 +70,22 @@ class BuildGo(build_py):
         except subprocess.CalledProcessError as e:
             print(e.stderr)
             raise
-        build_py.run(self)
 
 
-def is_extension_file(name):
-    return name.startswith("pykubectl.wrapped") and not (
-        name.endswith(".pyx") or name.endswith(".pxd")
-    )
+# def is_extension_file(name):
+#     return name.startswith("pykubectl.wrapped") and not (
+#         name.endswith(".pyx") or name.endswith(".pxd")
+#     )
 
 
-for root, dirs, files in os.walk(".", topdown=False):
-    for name in files:
-        if is_extension_file(name):
-            os.remove(os.path.join(root, name))
-    for name in dirs:
-        if name == "build":
-            shutil.rmtree(name)
+# TODO(olegs): This should be smarter to only delete stale binaries
+# for root, dirs, files in os.walk(".", topdown=False):
+#     for name in files:
+#         if is_extension_file(name):
+#             os.remove(os.path.join(root, name))
+#     for name in dirs:
+#         if name == "build":
+#             shutil.rmtree(name)
 
 setup(
     install_requires=['cython'],
