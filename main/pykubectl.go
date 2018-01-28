@@ -1,9 +1,12 @@
 package main
 
 import (
+	"bufio"
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"runtime/debug"
+	"strings"
 
 	// You should never import this, this will try to reinitialize
 	// flags, and panic
@@ -16,6 +19,19 @@ import (
 	kresource "k8s.io/kubernetes/pkg/kubectl/resource"
 )
 import "C"
+
+func errWithStack(original error) string {
+	scanner := bufio.NewScanner(bytes.NewReader(debug.Stack()))
+	i := 0
+	lines := []string{original.Error()}
+	for scanner.Scan() {
+		if i > 4 {
+			lines = append(lines, scanner.Text())
+		}
+		i++
+	}
+	return strings.Join(lines, "\n")
+}
 
 func translateGetOptions(raw map[string]interface{}) *resource.GetOptions {
 	foptions := kresource.FilenameOptions{}
@@ -74,8 +90,10 @@ func ResourceGet(optsEncoded string, typeOrName []string) (res string, serr stri
 		}
 	}()
 	opts := map[string]interface{}{}
+	fmt.Printf("Decoding: %v\n", optsEncoded)
+	fmt.Printf("Type or name: %v\n", typeOrName)
 	if err := json.Unmarshal([]byte(optsEncoded), &opts); err != nil {
-		return "", err.Error()
+		return "", errWithStack(err)
 	}
 	factory := cmdutil.NewFactory(nil)
 	options := translateGetOptions(opts)
@@ -94,15 +112,15 @@ func ResourceGet(optsEncoded string, typeOrName []string) (res string, serr stri
 		Flatten().
 		Do()
 	if err := result.Err(); err != nil {
-		return "", err.Error()
+		return "", errWithStack(err)
 	}
 	object, err := result.Object()
 	if err != nil {
-		return "", err.Error()
+		return "", errWithStack(err)
 	}
 	payload, err := json.Marshal(object)
 	if err != nil {
-		return "", err.Error()
+		return "", errWithStack(err)
 	}
 	return string(payload), ""
 }
@@ -116,19 +134,19 @@ func Create(optsEncoded string) (res string, serr string) {
 	}()
 	opts := map[string]interface{}{}
 	if err := json.Unmarshal([]byte(optsEncoded), &opts); err != nil {
-		return "", err.Error()
+		return "", errWithStack(err)
 	}
 	options := translateCreateOptions(opts)
 
 	factory := cmdutil.NewFactory(nil)
 	schema, err := factory.Validator(false)
 	if err != nil {
-		return "", err.Error()
+		return "", errWithStack(err)
 	}
 
 	cmdNamespace, enforceNamespace, err := factory.DefaultNamespace()
 	if err != nil {
-		return "", err.Error()
+		return "", errWithStack(err)
 	}
 
 	result := factory.NewBuilder().
@@ -141,16 +159,16 @@ func Create(optsEncoded string) (res string, serr string) {
 		Flatten().
 		Do()
 	if err = result.Err(); err != nil {
-		return "", err.Error()
+		return "", errWithStack(err)
 	}
 
 	object, err := result.Object()
 	if err != nil {
-		return "", err.Error()
+		return "", errWithStack(err)
 	}
 	payload, err := json.Marshal(object)
 	if err != nil {
-		return "", err.Error()
+		return "", errWithStack(err)
 	}
 	return string(payload), ""
 

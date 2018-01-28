@@ -5,4 +5,4 @@ import pprint
 from pykubectl import kubectl_get
 
 pp = pprint.PrettyPrinter(indent=4)
-pp.pprint(kubectl_get(None, ['pods']))
+pp.pprint(kubectl_get(['pods']))

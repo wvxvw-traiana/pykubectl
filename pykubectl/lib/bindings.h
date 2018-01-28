@@ -4,6 +4,8 @@
 #include "libgokubectl.h"
 #include <stddef.h>
 
-struct ResourceGet_return kubectl_get(const char**, size_t);
+struct ResourceGet_return kubectl_get(const char*, size_t, const char**, size_t);
+
+void free_cstring_array(char**, size_t);
 
 #endif // BINDINGS_H
