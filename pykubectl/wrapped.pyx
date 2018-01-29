@@ -6,17 +6,14 @@ from libc.string cimport strcmp, memcpy
 
 
 cdef extern from "lib/bindings.h":
-    struct GoString:
-        const char* p
-        int n
 
     struct ResourceGet_return:
-        GoString r0
-        GoString r1
+        char* r0
+        char* r1
 
     struct Create_return:
-        GoString r0
-        GoString r1
+        char* r0
+        char* r1
 
     ResourceGet_return kubectl_get(
         const char* opts,
@@ -28,6 +25,10 @@ cdef extern from "lib/bindings.h":
     Create_return kubectl_create(const char* opts, size_t opts_len)
 
     void free_cstring_array(char**, size_t)
+
+    void free_resource_get(ResourceGet_return)
+
+    void free_create(Create_return)
 
 
 cdef char** to_cstring_array(object strings):
@@ -66,11 +67,15 @@ cpdef object pykubectl_get_impl(object items, bytes options):
     )
     free_cstring_array(args, nargs)
 
-    if result.r0.n == 0:
-        message = result.r1.p[:result.r1.n]
-        raise Exception("kubectl failed: '{}'".format(message.decode("utf-8")))
-    message = result.r0.p[:result.r0.n]
-    return message.decode("utf-8")
+    message = result.r0
+    if len(message) == 0:
+        message = result.r1
+        ex = Exception("kubectl failed: '{}'".format(message.decode("utf-8")))
+        free_resource_get(result)
+        raise ex
+    cdef str result_str = message.decode("utf-8")
+    free_resource_get(result)
+    return result_str
 
 
 cpdef object pykubectl_create_impl(bytes options):
@@ -79,8 +84,12 @@ cpdef object pykubectl_create_impl(bytes options):
     cdef Create_return result = kubectl_create(opts, opt_len)
     cdef bytes message
 
-    if result.r0.n == 0:
-        message = result.r1.p[:result.r1.n]
-        raise Exception("kubectl failed: '{}'".format(message.decode("utf-8")))
-    message = result.r0.p[:result.r0.n]
-    return message.decode("utf-8")
+    message = result.r0
+    if len(message) == 0:
+        message = result.r1
+        ex = Exception("kubectl failed: '{}'".format(message.decode("utf-8")))
+        free_create(result)
+        raise ex
+    cdef str result_str = message.decode("utf-8")
+    free_create(result)
+    return result_str

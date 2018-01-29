@@ -55,16 +55,16 @@ extern "C" {
 
 /* Return type for ResourceGet */
 struct ResourceGet_return {
-	GoString r0; /* res */
-	GoString r1; /* serr */
+	char* r0; /* res */
+	char* r1; /* serr */
 };
 
 extern struct ResourceGet_return ResourceGet(GoString p0, GoSlice p1);
 
 /* Return type for Create */
 struct Create_return {
-	GoString r0; /* res */
-	GoString r1; /* serr */
+	char* r0; /* res */
+	char* r1; /* serr */
 };
 
 extern struct Create_return Create(GoString p0);

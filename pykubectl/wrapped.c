@@ -1050,7 +1050,7 @@ static PyObject *__pyx_pf_9pykubectl_7wrapped_pykubectl_get_impl(CYTHON_UNUSED P
 static PyObject *__pyx_pf_9pykubectl_7wrapped_2pykubectl_create_impl(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_options); /* proto */
 static PyObject *__pyx_tuple_;
 
-/* "pykubectl/wrapped.pyx":33
+/* "pykubectl/wrapped.pyx":34
  * 
  * 
  * cdef char** to_cstring_array(object strings):             # <<<<<<<<<<<<<<
@@ -1075,27 +1075,27 @@ static char **__pyx_f_9pykubectl_7wrapped_to_cstring_array(PyObject *__pyx_v_str
   char *__pyx_t_5;
   __Pyx_RefNannySetupContext("to_cstring_array", 0);
 
-  /* "pykubectl/wrapped.pyx":34
+  /* "pykubectl/wrapped.pyx":35
  * 
  * cdef char** to_cstring_array(object strings):
  *     cdef char** result = <char**>malloc(len(strings) * sizeof(char*))             # <<<<<<<<<<<<<<
  *     cdef char* itemp
  *     cdef size_t string_size
  */
-  __pyx_t_1 = PyObject_Length(__pyx_v_strings); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 34, __pyx_L1_error)
+  __pyx_t_1 = PyObject_Length(__pyx_v_strings); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 35, __pyx_L1_error)
   __pyx_v_result = ((char **)malloc((__pyx_t_1 * (sizeof(char *)))));
 
-  /* "pykubectl/wrapped.pyx":39
+  /* "pykubectl/wrapped.pyx":40
  *     cdef bytes item
  *     cdef char* citem
  *     cdef size_t nelements = len(strings)             # <<<<<<<<<<<<<<
  *     cdef size_t i = 0
  * 
  */
-  __pyx_t_1 = PyObject_Length(__pyx_v_strings); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_1 = PyObject_Length(__pyx_v_strings); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 40, __pyx_L1_error)
   __pyx_v_nelements = __pyx_t_1;
 
-  /* "pykubectl/wrapped.pyx":40
+  /* "pykubectl/wrapped.pyx":41
  *     cdef char* citem
  *     cdef size_t nelements = len(strings)
  *     cdef size_t i = 0             # <<<<<<<<<<<<<<
@@ -1104,7 +1104,7 @@ static char **__pyx_f_9pykubectl_7wrapped_to_cstring_array(PyObject *__pyx_v_str
  */
   __pyx_v_i = 0;
 
-  /* "pykubectl/wrapped.pyx":42
+  /* "pykubectl/wrapped.pyx":43
  *     cdef size_t i = 0
  * 
  *     while i < nelements:             # <<<<<<<<<<<<<<
@@ -1115,34 +1115,34 @@ static char **__pyx_f_9pykubectl_7wrapped_to_cstring_array(PyObject *__pyx_v_str
     __pyx_t_2 = ((__pyx_v_i < __pyx_v_nelements) != 0);
     if (!__pyx_t_2) break;
 
-    /* "pykubectl/wrapped.pyx":43
+    /* "pykubectl/wrapped.pyx":44
  * 
  *     while i < nelements:
  *         item = str(strings[i]).encode("utf-8")             # <<<<<<<<<<<<<<
  *         itemp = <char*>item
  *         string_size = <size_t>(len(item) + 1) * sizeof(char)
  */
-    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_strings, __pyx_v_i, size_t, 0, __Pyx_PyInt_FromSize_t, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 43, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_strings, __pyx_v_i, size_t, 0, __Pyx_PyInt_FromSize_t, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 44, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 43, __pyx_L1_error)
+    __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 44, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_3);
     PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3);
     __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_4, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 43, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_4, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 44, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_encode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 43, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_encode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 44, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 43, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 44, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (!(likely(PyBytes_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "bytes", Py_TYPE(__pyx_t_3)->tp_name), 0))) __PYX_ERR(0, 43, __pyx_L1_error)
+    if (!(likely(PyBytes_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "bytes", Py_TYPE(__pyx_t_3)->tp_name), 0))) __PYX_ERR(0, 44, __pyx_L1_error)
     __Pyx_XDECREF_SET(__pyx_v_item, ((PyObject*)__pyx_t_3));
     __pyx_t_3 = 0;
 
-    /* "pykubectl/wrapped.pyx":44
+    /* "pykubectl/wrapped.pyx":45
  *     while i < nelements:
  *         item = str(strings[i]).encode("utf-8")
  *         itemp = <char*>item             # <<<<<<<<<<<<<<
@@ -1151,12 +1151,12 @@ static char **__pyx_f_9pykubectl_7wrapped_to_cstring_array(PyObject *__pyx_v_str
  */
     if (unlikely(__pyx_v_item == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "expected bytes, NoneType found");
-      __PYX_ERR(0, 44, __pyx_L1_error)
+      __PYX_ERR(0, 45, __pyx_L1_error)
     }
-    __pyx_t_5 = __Pyx_PyBytes_AsWritableString(__pyx_v_item); if (unlikely((!__pyx_t_5) && PyErr_Occurred())) __PYX_ERR(0, 44, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyBytes_AsWritableString(__pyx_v_item); if (unlikely((!__pyx_t_5) && PyErr_Occurred())) __PYX_ERR(0, 45, __pyx_L1_error)
     __pyx_v_itemp = ((char *)__pyx_t_5);
 
-    /* "pykubectl/wrapped.pyx":45
+    /* "pykubectl/wrapped.pyx":46
  *         item = str(strings[i]).encode("utf-8")
  *         itemp = <char*>item
  *         string_size = <size_t>(len(item) + 1) * sizeof(char)             # <<<<<<<<<<<<<<
@@ -1165,12 +1165,12 @@ static char **__pyx_f_9pykubectl_7wrapped_to_cstring_array(PyObject *__pyx_v_str
  */
     if (unlikely(__pyx_v_item == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-      __PYX_ERR(0, 45, __pyx_L1_error)
+      __PYX_ERR(0, 46, __pyx_L1_error)
     }
-    __pyx_t_1 = PyBytes_GET_SIZE(__pyx_v_item); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 45, __pyx_L1_error)
+    __pyx_t_1 = PyBytes_GET_SIZE(__pyx_v_item); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 46, __pyx_L1_error)
     __pyx_v_string_size = (((size_t)(__pyx_t_1 + 1)) * (sizeof(char)));
 
-    /* "pykubectl/wrapped.pyx":46
+    /* "pykubectl/wrapped.pyx":47
  *         itemp = <char*>item
  *         string_size = <size_t>(len(item) + 1) * sizeof(char)
  *         citem = <char*>malloc(string_size)             # <<<<<<<<<<<<<<
@@ -1179,7 +1179,7 @@ static char **__pyx_f_9pykubectl_7wrapped_to_cstring_array(PyObject *__pyx_v_str
  */
     __pyx_v_citem = ((char *)malloc(__pyx_v_string_size));
 
-    /* "pykubectl/wrapped.pyx":47
+    /* "pykubectl/wrapped.pyx":48
  *         string_size = <size_t>(len(item) + 1) * sizeof(char)
  *         citem = <char*>malloc(string_size)
  *         memcpy(citem, itemp, string_size)             # <<<<<<<<<<<<<<
@@ -1188,7 +1188,7 @@ static char **__pyx_f_9pykubectl_7wrapped_to_cstring_array(PyObject *__pyx_v_str
  */
     memcpy(__pyx_v_citem, __pyx_v_itemp, __pyx_v_string_size);
 
-    /* "pykubectl/wrapped.pyx":48
+    /* "pykubectl/wrapped.pyx":49
  *         citem = <char*>malloc(string_size)
  *         memcpy(citem, itemp, string_size)
  *         citem[string_size - 1] = <char>0             # <<<<<<<<<<<<<<
@@ -1197,7 +1197,7 @@ static char **__pyx_f_9pykubectl_7wrapped_to_cstring_array(PyObject *__pyx_v_str
  */
     (__pyx_v_citem[(__pyx_v_string_size - 1)]) = ((char)0);
 
-    /* "pykubectl/wrapped.pyx":49
+    /* "pykubectl/wrapped.pyx":50
  *         memcpy(citem, itemp, string_size)
  *         citem[string_size - 1] = <char>0
  *         result[i] = citem             # <<<<<<<<<<<<<<
@@ -1206,7 +1206,7 @@ static char **__pyx_f_9pykubectl_7wrapped_to_cstring_array(PyObject *__pyx_v_str
  */
     (__pyx_v_result[__pyx_v_i]) = __pyx_v_citem;
 
-    /* "pykubectl/wrapped.pyx":50
+    /* "pykubectl/wrapped.pyx":51
  *         citem[string_size - 1] = <char>0
  *         result[i] = citem
  *         i += 1             # <<<<<<<<<<<<<<
@@ -1216,7 +1216,7 @@ static char **__pyx_f_9pykubectl_7wrapped_to_cstring_array(PyObject *__pyx_v_str
     __pyx_v_i = (__pyx_v_i + 1);
   }
 
-  /* "pykubectl/wrapped.pyx":51
+  /* "pykubectl/wrapped.pyx":52
  *         result[i] = citem
  *         i += 1
  *     return result             # <<<<<<<<<<<<<<
@@ -1226,7 +1226,7 @@ static char **__pyx_f_9pykubectl_7wrapped_to_cstring_array(PyObject *__pyx_v_str
   __pyx_r = __pyx_v_result;
   goto __pyx_L0;
 
-  /* "pykubectl/wrapped.pyx":33
+  /* "pykubectl/wrapped.pyx":34
  * 
  * 
  * cdef char** to_cstring_array(object strings):             # <<<<<<<<<<<<<<
@@ -1246,7 +1246,7 @@ static char **__pyx_f_9pykubectl_7wrapped_to_cstring_array(PyObject *__pyx_v_str
   return __pyx_r;
 }
 
-/* "pykubectl/wrapped.pyx":54
+/* "pykubectl/wrapped.pyx":55
  * 
  * 
  * cpdef object pykubectl_get_impl(object items, bytes options):             # <<<<<<<<<<<<<<
@@ -1262,29 +1262,31 @@ static PyObject *__pyx_f_9pykubectl_7wrapped_pykubectl_get_impl(PyObject *__pyx_
   char **__pyx_v_args;
   char *__pyx_v_opts;
   struct ResourceGet_return __pyx_v_result;
+  PyObject *__pyx_v_ex = NULL;
+  PyObject *__pyx_v_result_str = 0;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   Py_ssize_t __pyx_t_1;
   char *__pyx_t_2;
-  int __pyx_t_3;
-  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  int __pyx_t_4;
   PyObject *__pyx_t_5 = NULL;
   PyObject *__pyx_t_6 = NULL;
   PyObject *__pyx_t_7 = NULL;
   PyObject *__pyx_t_8 = NULL;
   __Pyx_RefNannySetupContext("pykubectl_get_impl", 0);
 
-  /* "pykubectl/wrapped.pyx":55
+  /* "pykubectl/wrapped.pyx":56
  * 
  * cpdef object pykubectl_get_impl(object items, bytes options):
  *     cdef size_t nargs = len(items)             # <<<<<<<<<<<<<<
  *     cdef size_t optlen = len(options)
  *     cdef bytes message
  */
-  __pyx_t_1 = PyObject_Length(__pyx_v_items); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_t_1 = PyObject_Length(__pyx_v_items); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 56, __pyx_L1_error)
   __pyx_v_nargs = __pyx_t_1;
 
-  /* "pykubectl/wrapped.pyx":56
+  /* "pykubectl/wrapped.pyx":57
  * cpdef object pykubectl_get_impl(object items, bytes options):
  *     cdef size_t nargs = len(items)
  *     cdef size_t optlen = len(options)             # <<<<<<<<<<<<<<
@@ -1293,12 +1295,12 @@ static PyObject *__pyx_f_9pykubectl_7wrapped_pykubectl_get_impl(PyObject *__pyx_
  */
   if (unlikely(__pyx_v_options == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    __PYX_ERR(0, 56, __pyx_L1_error)
+    __PYX_ERR(0, 57, __pyx_L1_error)
   }
-  __pyx_t_1 = PyBytes_GET_SIZE(__pyx_v_options); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_t_1 = PyBytes_GET_SIZE(__pyx_v_options); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 57, __pyx_L1_error)
   __pyx_v_optlen = __pyx_t_1;
 
-  /* "pykubectl/wrapped.pyx":58
+  /* "pykubectl/wrapped.pyx":59
  *     cdef size_t optlen = len(options)
  *     cdef bytes message
  *     cdef char** args = to_cstring_array(items)             # <<<<<<<<<<<<<<
@@ -1307,7 +1309,7 @@ static PyObject *__pyx_f_9pykubectl_7wrapped_pykubectl_get_impl(PyObject *__pyx_
  */
   __pyx_v_args = __pyx_f_9pykubectl_7wrapped_to_cstring_array(__pyx_v_items);
 
-  /* "pykubectl/wrapped.pyx":59
+  /* "pykubectl/wrapped.pyx":60
  *     cdef bytes message
  *     cdef char** args = to_cstring_array(items)
  *     cdef char* opts = options             # <<<<<<<<<<<<<<
@@ -1316,12 +1318,12 @@ static PyObject *__pyx_f_9pykubectl_7wrapped_pykubectl_get_impl(PyObject *__pyx_
  */
   if (unlikely(__pyx_v_options == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "expected bytes, NoneType found");
-    __PYX_ERR(0, 59, __pyx_L1_error)
+    __PYX_ERR(0, 60, __pyx_L1_error)
   }
-  __pyx_t_2 = __Pyx_PyBytes_AsWritableString(__pyx_v_options); if (unlikely((!__pyx_t_2) && PyErr_Occurred())) __PYX_ERR(0, 59, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyBytes_AsWritableString(__pyx_v_options); if (unlikely((!__pyx_t_2) && PyErr_Occurred())) __PYX_ERR(0, 60, __pyx_L1_error)
   __pyx_v_opts = __pyx_t_2;
 
-  /* "pykubectl/wrapped.pyx":61
+  /* "pykubectl/wrapped.pyx":62
  *     cdef char* opts = options
  * 
  *     cdef ResourceGet_return result = kubectl_get(             # <<<<<<<<<<<<<<
@@ -1330,47 +1332,60 @@ static PyObject *__pyx_f_9pykubectl_7wrapped_pykubectl_get_impl(PyObject *__pyx_
  */
   __pyx_v_result = kubectl_get(__pyx_v_opts, __pyx_v_optlen, ((char const **)__pyx_v_args), __pyx_v_nargs);
 
-  /* "pykubectl/wrapped.pyx":67
+  /* "pykubectl/wrapped.pyx":68
  *         nargs
  *     )
  *     free_cstring_array(args, nargs)             # <<<<<<<<<<<<<<
  * 
- *     if result.r0.n == 0:
+ *     message = result.r0
  */
   free_cstring_array(__pyx_v_args, __pyx_v_nargs);
 
-  /* "pykubectl/wrapped.pyx":69
+  /* "pykubectl/wrapped.pyx":70
  *     free_cstring_array(args, nargs)
  * 
- *     if result.r0.n == 0:             # <<<<<<<<<<<<<<
- *         message = result.r1.p[:result.r1.n]
- *         raise Exception("kubectl failed: '{}'".format(message.decode("utf-8")))
+ *     message = result.r0             # <<<<<<<<<<<<<<
+ *     if len(message) == 0:
+ *         message = result.r1
  */
-  __pyx_t_3 = ((__pyx_v_result.r0.n == 0) != 0);
-  if (__pyx_t_3) {
+  __pyx_t_3 = __Pyx_PyBytes_FromString(__pyx_v_result.r0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 70, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_v_message = ((PyObject*)__pyx_t_3);
+  __pyx_t_3 = 0;
 
-    /* "pykubectl/wrapped.pyx":70
+  /* "pykubectl/wrapped.pyx":71
  * 
- *     if result.r0.n == 0:
- *         message = result.r1.p[:result.r1.n]             # <<<<<<<<<<<<<<
- *         raise Exception("kubectl failed: '{}'".format(message.decode("utf-8")))
- *     message = result.r0.p[:result.r0.n]
+ *     message = result.r0
+ *     if len(message) == 0:             # <<<<<<<<<<<<<<
+ *         message = result.r1
+ *         ex = Exception("kubectl failed: '{}'".format(message.decode("utf-8")))
  */
-    __pyx_t_4 = __Pyx_PyBytes_FromStringAndSize(__pyx_v_result.r1.p + 0, __pyx_v_result.r1.n - 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 70, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
-    __pyx_v_message = ((PyObject*)__pyx_t_4);
-    __pyx_t_4 = 0;
+  __pyx_t_1 = PyBytes_GET_SIZE(__pyx_v_message); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_4 = ((__pyx_t_1 == 0) != 0);
+  if (__pyx_t_4) {
 
-    /* "pykubectl/wrapped.pyx":71
- *     if result.r0.n == 0:
- *         message = result.r1.p[:result.r1.n]
- *         raise Exception("kubectl failed: '{}'".format(message.decode("utf-8")))             # <<<<<<<<<<<<<<
- *     message = result.r0.p[:result.r0.n]
- *     return message.decode("utf-8")
+    /* "pykubectl/wrapped.pyx":72
+ *     message = result.r0
+ *     if len(message) == 0:
+ *         message = result.r1             # <<<<<<<<<<<<<<
+ *         ex = Exception("kubectl failed: '{}'".format(message.decode("utf-8")))
+ *         free_resource_get(result)
  */
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_kubectl_failed, __pyx_n_s_format); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 71, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyBytes_FromString(__pyx_v_result.r1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 72, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF_SET(__pyx_v_message, ((PyObject*)__pyx_t_3));
+    __pyx_t_3 = 0;
+
+    /* "pykubectl/wrapped.pyx":73
+ *     if len(message) == 0:
+ *         message = result.r1
+ *         ex = Exception("kubectl failed: '{}'".format(message.decode("utf-8")))             # <<<<<<<<<<<<<<
+ *         free_resource_get(result)
+ *         raise ex
+ */
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_kubectl_failed, __pyx_n_s_format); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 73, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = __Pyx_decode_bytes(__pyx_v_message, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 71, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_decode_bytes(__pyx_v_message, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 73, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_t_7 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
@@ -1383,89 +1398,115 @@ static PyObject *__pyx_f_9pykubectl_7wrapped_pykubectl_get_impl(PyObject *__pyx_
       }
     }
     if (!__pyx_t_7) {
-      __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 71, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 73, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __Pyx_GOTREF(__pyx_t_4);
+      __Pyx_GOTREF(__pyx_t_3);
     } else {
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_5)) {
         PyObject *__pyx_temp[2] = {__pyx_t_7, __pyx_t_6};
-        __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 71, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 73, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-        __Pyx_GOTREF(__pyx_t_4);
+        __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       } else
       #endif
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_5)) {
         PyObject *__pyx_temp[2] = {__pyx_t_7, __pyx_t_6};
-        __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 71, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 73, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-        __Pyx_GOTREF(__pyx_t_4);
+        __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       } else
       #endif
       {
-        __pyx_t_8 = PyTuple_New(1+1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 71, __pyx_L1_error)
+        __pyx_t_8 = PyTuple_New(1+1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 73, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_8);
         __Pyx_GIVEREF(__pyx_t_7); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_7); __pyx_t_7 = NULL;
         __Pyx_GIVEREF(__pyx_t_6);
         PyTuple_SET_ITEM(__pyx_t_8, 0+1, __pyx_t_6);
         __pyx_t_6 = 0;
-        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_8, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 71, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_4);
+        __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_8, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 73, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       }
     }
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 71, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 73, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __Pyx_GIVEREF(__pyx_t_4);
-    PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4);
-    __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyObject_Call(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])), __pyx_t_5, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 71, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_GIVEREF(__pyx_t_3);
+    PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3);
+    __pyx_t_3 = 0;
+    __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])), __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 73, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_Raise(__pyx_t_4, 0, 0, 0);
-    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __PYX_ERR(0, 71, __pyx_L1_error)
+    __pyx_v_ex = __pyx_t_3;
+    __pyx_t_3 = 0;
 
-    /* "pykubectl/wrapped.pyx":69
- *     free_cstring_array(args, nargs)
+    /* "pykubectl/wrapped.pyx":74
+ *         message = result.r1
+ *         ex = Exception("kubectl failed: '{}'".format(message.decode("utf-8")))
+ *         free_resource_get(result)             # <<<<<<<<<<<<<<
+ *         raise ex
+ *     cdef str result_str = message.decode("utf-8")
+ */
+    free_resource_get(__pyx_v_result);
+
+    /* "pykubectl/wrapped.pyx":75
+ *         ex = Exception("kubectl failed: '{}'".format(message.decode("utf-8")))
+ *         free_resource_get(result)
+ *         raise ex             # <<<<<<<<<<<<<<
+ *     cdef str result_str = message.decode("utf-8")
+ *     free_resource_get(result)
+ */
+    __Pyx_Raise(__pyx_v_ex, 0, 0, 0);
+    __PYX_ERR(0, 75, __pyx_L1_error)
+
+    /* "pykubectl/wrapped.pyx":71
  * 
- *     if result.r0.n == 0:             # <<<<<<<<<<<<<<
- *         message = result.r1.p[:result.r1.n]
- *         raise Exception("kubectl failed: '{}'".format(message.decode("utf-8")))
+ *     message = result.r0
+ *     if len(message) == 0:             # <<<<<<<<<<<<<<
+ *         message = result.r1
+ *         ex = Exception("kubectl failed: '{}'".format(message.decode("utf-8")))
  */
   }
 
-  /* "pykubectl/wrapped.pyx":72
- *         message = result.r1.p[:result.r1.n]
- *         raise Exception("kubectl failed: '{}'".format(message.decode("utf-8")))
- *     message = result.r0.p[:result.r0.n]             # <<<<<<<<<<<<<<
- *     return message.decode("utf-8")
+  /* "pykubectl/wrapped.pyx":76
+ *         free_resource_get(result)
+ *         raise ex
+ *     cdef str result_str = message.decode("utf-8")             # <<<<<<<<<<<<<<
+ *     free_resource_get(result)
+ *     return result_str
+ */
+  __pyx_t_3 = __Pyx_decode_bytes(__pyx_v_message, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 76, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (!(likely(PyString_CheckExact(__pyx_t_3))||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_3)->tp_name), 0))) __PYX_ERR(0, 76, __pyx_L1_error)
+  __pyx_v_result_str = ((PyObject*)__pyx_t_3);
+  __pyx_t_3 = 0;
+
+  /* "pykubectl/wrapped.pyx":77
+ *         raise ex
+ *     cdef str result_str = message.decode("utf-8")
+ *     free_resource_get(result)             # <<<<<<<<<<<<<<
+ *     return result_str
  * 
  */
-  __pyx_t_4 = __Pyx_PyBytes_FromStringAndSize(__pyx_v_result.r0.p + 0, __pyx_v_result.r0.n - 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 72, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __pyx_v_message = ((PyObject*)__pyx_t_4);
-  __pyx_t_4 = 0;
+  free_resource_get(__pyx_v_result);
 
-  /* "pykubectl/wrapped.pyx":73
- *         raise Exception("kubectl failed: '{}'".format(message.decode("utf-8")))
- *     message = result.r0.p[:result.r0.n]
- *     return message.decode("utf-8")             # <<<<<<<<<<<<<<
+  /* "pykubectl/wrapped.pyx":78
+ *     cdef str result_str = message.decode("utf-8")
+ *     free_resource_get(result)
+ *     return result_str             # <<<<<<<<<<<<<<
  * 
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_4 = __Pyx_decode_bytes(__pyx_v_message, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 73, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __pyx_r = __pyx_t_4;
-  __pyx_t_4 = 0;
+  __Pyx_INCREF(__pyx_v_result_str);
+  __pyx_r = __pyx_v_result_str;
   goto __pyx_L0;
 
-  /* "pykubectl/wrapped.pyx":54
+  /* "pykubectl/wrapped.pyx":55
  * 
  * 
  * cpdef object pykubectl_get_impl(object items, bytes options):             # <<<<<<<<<<<<<<
@@ -1475,7 +1516,7 @@ static PyObject *__pyx_f_9pykubectl_7wrapped_pykubectl_get_impl(PyObject *__pyx_
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_7);
@@ -1484,6 +1525,8 @@ static PyObject *__pyx_f_9pykubectl_7wrapped_pykubectl_get_impl(PyObject *__pyx_
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_message);
+  __Pyx_XDECREF(__pyx_v_ex);
+  __Pyx_XDECREF(__pyx_v_result_str);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
@@ -1520,11 +1563,11 @@ static PyObject *__pyx_pw_9pykubectl_7wrapped_1pykubectl_get_impl(PyObject *__py
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_options)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("pykubectl_get_impl", 1, 2, 2, 1); __PYX_ERR(0, 54, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("pykubectl_get_impl", 1, 2, 2, 1); __PYX_ERR(0, 55, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "pykubectl_get_impl") < 0)) __PYX_ERR(0, 54, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "pykubectl_get_impl") < 0)) __PYX_ERR(0, 55, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -1537,13 +1580,13 @@ static PyObject *__pyx_pw_9pykubectl_7wrapped_1pykubectl_get_impl(PyObject *__py
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("pykubectl_get_impl", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 54, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("pykubectl_get_impl", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 55, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("pykubectl.wrapped.pykubectl_get_impl", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_options), (&PyBytes_Type), 1, "options", 1))) __PYX_ERR(0, 54, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_options), (&PyBytes_Type), 1, "options", 1))) __PYX_ERR(0, 55, __pyx_L1_error)
   __pyx_r = __pyx_pf_9pykubectl_7wrapped_pykubectl_get_impl(__pyx_self, __pyx_v_items, __pyx_v_options);
 
   /* function exit code */
@@ -1561,7 +1604,7 @@ static PyObject *__pyx_pf_9pykubectl_7wrapped_pykubectl_get_impl(CYTHON_UNUSED P
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("pykubectl_get_impl", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_9pykubectl_7wrapped_pykubectl_get_impl(__pyx_v_items, __pyx_v_options, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 54, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_9pykubectl_7wrapped_pykubectl_get_impl(__pyx_v_items, __pyx_v_options, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 55, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -1578,7 +1621,7 @@ static PyObject *__pyx_pf_9pykubectl_7wrapped_pykubectl_get_impl(CYTHON_UNUSED P
   return __pyx_r;
 }
 
-/* "pykubectl/wrapped.pyx":76
+/* "pykubectl/wrapped.pyx":81
  * 
  * 
  * cpdef object pykubectl_create_impl(bytes options):             # <<<<<<<<<<<<<<
@@ -1592,19 +1635,21 @@ static PyObject *__pyx_f_9pykubectl_7wrapped_pykubectl_create_impl(PyObject *__p
   size_t __pyx_v_opt_len;
   struct Create_return __pyx_v_result;
   PyObject *__pyx_v_message = 0;
+  PyObject *__pyx_v_ex = NULL;
+  PyObject *__pyx_v_result_str = 0;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   char const *__pyx_t_1;
   Py_ssize_t __pyx_t_2;
-  int __pyx_t_3;
-  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  int __pyx_t_4;
   PyObject *__pyx_t_5 = NULL;
   PyObject *__pyx_t_6 = NULL;
   PyObject *__pyx_t_7 = NULL;
   PyObject *__pyx_t_8 = NULL;
   __Pyx_RefNannySetupContext("pykubectl_create_impl", 0);
 
-  /* "pykubectl/wrapped.pyx":77
+  /* "pykubectl/wrapped.pyx":82
  * 
  * cpdef object pykubectl_create_impl(bytes options):
  *     cdef const char* opts = options             # <<<<<<<<<<<<<<
@@ -1613,12 +1658,12 @@ static PyObject *__pyx_f_9pykubectl_7wrapped_pykubectl_create_impl(PyObject *__p
  */
   if (unlikely(__pyx_v_options == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "expected bytes, NoneType found");
-    __PYX_ERR(0, 77, __pyx_L1_error)
+    __PYX_ERR(0, 82, __pyx_L1_error)
   }
-  __pyx_t_1 = __Pyx_PyBytes_AsString(__pyx_v_options); if (unlikely((!__pyx_t_1) && PyErr_Occurred())) __PYX_ERR(0, 77, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBytes_AsString(__pyx_v_options); if (unlikely((!__pyx_t_1) && PyErr_Occurred())) __PYX_ERR(0, 82, __pyx_L1_error)
   __pyx_v_opts = __pyx_t_1;
 
-  /* "pykubectl/wrapped.pyx":78
+  /* "pykubectl/wrapped.pyx":83
  * cpdef object pykubectl_create_impl(bytes options):
  *     cdef const char* opts = options
  *     cdef size_t opt_len = len(options)             # <<<<<<<<<<<<<<
@@ -1627,12 +1672,12 @@ static PyObject *__pyx_f_9pykubectl_7wrapped_pykubectl_create_impl(PyObject *__p
  */
   if (unlikely(__pyx_v_options == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    __PYX_ERR(0, 78, __pyx_L1_error)
+    __PYX_ERR(0, 83, __pyx_L1_error)
   }
-  __pyx_t_2 = PyBytes_GET_SIZE(__pyx_v_options); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 78, __pyx_L1_error)
+  __pyx_t_2 = PyBytes_GET_SIZE(__pyx_v_options); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 83, __pyx_L1_error)
   __pyx_v_opt_len = __pyx_t_2;
 
-  /* "pykubectl/wrapped.pyx":79
+  /* "pykubectl/wrapped.pyx":84
  *     cdef const char* opts = options
  *     cdef size_t opt_len = len(options)
  *     cdef Create_return result = kubectl_create(opts, opt_len)             # <<<<<<<<<<<<<<
@@ -1641,38 +1686,51 @@ static PyObject *__pyx_f_9pykubectl_7wrapped_pykubectl_create_impl(PyObject *__p
  */
   __pyx_v_result = kubectl_create(__pyx_v_opts, __pyx_v_opt_len);
 
-  /* "pykubectl/wrapped.pyx":82
+  /* "pykubectl/wrapped.pyx":87
  *     cdef bytes message
  * 
- *     if result.r0.n == 0:             # <<<<<<<<<<<<<<
- *         message = result.r1.p[:result.r1.n]
- *         raise Exception("kubectl failed: '{}'".format(message.decode("utf-8")))
+ *     message = result.r0             # <<<<<<<<<<<<<<
+ *     if len(message) == 0:
+ *         message = result.r1
  */
-  __pyx_t_3 = ((__pyx_v_result.r0.n == 0) != 0);
-  if (__pyx_t_3) {
+  __pyx_t_3 = __Pyx_PyBytes_FromString(__pyx_v_result.r0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_v_message = ((PyObject*)__pyx_t_3);
+  __pyx_t_3 = 0;
 
-    /* "pykubectl/wrapped.pyx":83
+  /* "pykubectl/wrapped.pyx":88
  * 
- *     if result.r0.n == 0:
- *         message = result.r1.p[:result.r1.n]             # <<<<<<<<<<<<<<
- *         raise Exception("kubectl failed: '{}'".format(message.decode("utf-8")))
- *     message = result.r0.p[:result.r0.n]
+ *     message = result.r0
+ *     if len(message) == 0:             # <<<<<<<<<<<<<<
+ *         message = result.r1
+ *         ex = Exception("kubectl failed: '{}'".format(message.decode("utf-8")))
  */
-    __pyx_t_4 = __Pyx_PyBytes_FromStringAndSize(__pyx_v_result.r1.p + 0, __pyx_v_result.r1.n - 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 83, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
-    __pyx_v_message = ((PyObject*)__pyx_t_4);
-    __pyx_t_4 = 0;
+  __pyx_t_2 = PyBytes_GET_SIZE(__pyx_v_message); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 88, __pyx_L1_error)
+  __pyx_t_4 = ((__pyx_t_2 == 0) != 0);
+  if (__pyx_t_4) {
 
-    /* "pykubectl/wrapped.pyx":84
- *     if result.r0.n == 0:
- *         message = result.r1.p[:result.r1.n]
- *         raise Exception("kubectl failed: '{}'".format(message.decode("utf-8")))             # <<<<<<<<<<<<<<
- *     message = result.r0.p[:result.r0.n]
- *     return message.decode("utf-8")
+    /* "pykubectl/wrapped.pyx":89
+ *     message = result.r0
+ *     if len(message) == 0:
+ *         message = result.r1             # <<<<<<<<<<<<<<
+ *         ex = Exception("kubectl failed: '{}'".format(message.decode("utf-8")))
+ *         free_create(result)
  */
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_kubectl_failed, __pyx_n_s_format); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 84, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyBytes_FromString(__pyx_v_result.r1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF_SET(__pyx_v_message, ((PyObject*)__pyx_t_3));
+    __pyx_t_3 = 0;
+
+    /* "pykubectl/wrapped.pyx":90
+ *     if len(message) == 0:
+ *         message = result.r1
+ *         ex = Exception("kubectl failed: '{}'".format(message.decode("utf-8")))             # <<<<<<<<<<<<<<
+ *         free_create(result)
+ *         raise ex
+ */
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_kubectl_failed, __pyx_n_s_format); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 90, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = __Pyx_decode_bytes(__pyx_v_message, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 84, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_decode_bytes(__pyx_v_message, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 90, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_t_7 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
@@ -1685,86 +1743,112 @@ static PyObject *__pyx_f_9pykubectl_7wrapped_pykubectl_create_impl(PyObject *__p
       }
     }
     if (!__pyx_t_7) {
-      __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 84, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 90, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __Pyx_GOTREF(__pyx_t_4);
+      __Pyx_GOTREF(__pyx_t_3);
     } else {
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_5)) {
         PyObject *__pyx_temp[2] = {__pyx_t_7, __pyx_t_6};
-        __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 84, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 90, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-        __Pyx_GOTREF(__pyx_t_4);
+        __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       } else
       #endif
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_5)) {
         PyObject *__pyx_temp[2] = {__pyx_t_7, __pyx_t_6};
-        __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 84, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 90, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-        __Pyx_GOTREF(__pyx_t_4);
+        __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       } else
       #endif
       {
-        __pyx_t_8 = PyTuple_New(1+1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 84, __pyx_L1_error)
+        __pyx_t_8 = PyTuple_New(1+1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 90, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_8);
         __Pyx_GIVEREF(__pyx_t_7); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_7); __pyx_t_7 = NULL;
         __Pyx_GIVEREF(__pyx_t_6);
         PyTuple_SET_ITEM(__pyx_t_8, 0+1, __pyx_t_6);
         __pyx_t_6 = 0;
-        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_8, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 84, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_4);
+        __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_8, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 90, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       }
     }
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 84, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 90, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __Pyx_GIVEREF(__pyx_t_4);
-    PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4);
-    __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyObject_Call(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])), __pyx_t_5, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 84, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_GIVEREF(__pyx_t_3);
+    PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3);
+    __pyx_t_3 = 0;
+    __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])), __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 90, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_Raise(__pyx_t_4, 0, 0, 0);
-    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __PYX_ERR(0, 84, __pyx_L1_error)
+    __pyx_v_ex = __pyx_t_3;
+    __pyx_t_3 = 0;
 
-    /* "pykubectl/wrapped.pyx":82
- *     cdef bytes message
+    /* "pykubectl/wrapped.pyx":91
+ *         message = result.r1
+ *         ex = Exception("kubectl failed: '{}'".format(message.decode("utf-8")))
+ *         free_create(result)             # <<<<<<<<<<<<<<
+ *         raise ex
+ *     cdef str result_str = message.decode("utf-8")
+ */
+    free_create(__pyx_v_result);
+
+    /* "pykubectl/wrapped.pyx":92
+ *         ex = Exception("kubectl failed: '{}'".format(message.decode("utf-8")))
+ *         free_create(result)
+ *         raise ex             # <<<<<<<<<<<<<<
+ *     cdef str result_str = message.decode("utf-8")
+ *     free_create(result)
+ */
+    __Pyx_Raise(__pyx_v_ex, 0, 0, 0);
+    __PYX_ERR(0, 92, __pyx_L1_error)
+
+    /* "pykubectl/wrapped.pyx":88
  * 
- *     if result.r0.n == 0:             # <<<<<<<<<<<<<<
- *         message = result.r1.p[:result.r1.n]
- *         raise Exception("kubectl failed: '{}'".format(message.decode("utf-8")))
+ *     message = result.r0
+ *     if len(message) == 0:             # <<<<<<<<<<<<<<
+ *         message = result.r1
+ *         ex = Exception("kubectl failed: '{}'".format(message.decode("utf-8")))
  */
   }
 
-  /* "pykubectl/wrapped.pyx":85
- *         message = result.r1.p[:result.r1.n]
- *         raise Exception("kubectl failed: '{}'".format(message.decode("utf-8")))
- *     message = result.r0.p[:result.r0.n]             # <<<<<<<<<<<<<<
- *     return message.decode("utf-8")
+  /* "pykubectl/wrapped.pyx":93
+ *         free_create(result)
+ *         raise ex
+ *     cdef str result_str = message.decode("utf-8")             # <<<<<<<<<<<<<<
+ *     free_create(result)
+ *     return result_str
  */
-  __pyx_t_4 = __Pyx_PyBytes_FromStringAndSize(__pyx_v_result.r0.p + 0, __pyx_v_result.r0.n - 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 85, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __pyx_v_message = ((PyObject*)__pyx_t_4);
-  __pyx_t_4 = 0;
+  __pyx_t_3 = __Pyx_decode_bytes(__pyx_v_message, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (!(likely(PyString_CheckExact(__pyx_t_3))||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_3)->tp_name), 0))) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_v_result_str = ((PyObject*)__pyx_t_3);
+  __pyx_t_3 = 0;
 
-  /* "pykubectl/wrapped.pyx":86
- *         raise Exception("kubectl failed: '{}'".format(message.decode("utf-8")))
- *     message = result.r0.p[:result.r0.n]
- *     return message.decode("utf-8")             # <<<<<<<<<<<<<<
+  /* "pykubectl/wrapped.pyx":94
+ *         raise ex
+ *     cdef str result_str = message.decode("utf-8")
+ *     free_create(result)             # <<<<<<<<<<<<<<
+ *     return result_str
+ */
+  free_create(__pyx_v_result);
+
+  /* "pykubectl/wrapped.pyx":95
+ *     cdef str result_str = message.decode("utf-8")
+ *     free_create(result)
+ *     return result_str             # <<<<<<<<<<<<<<
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_4 = __Pyx_decode_bytes(__pyx_v_message, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 86, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __pyx_r = __pyx_t_4;
-  __pyx_t_4 = 0;
+  __Pyx_INCREF(__pyx_v_result_str);
+  __pyx_r = __pyx_v_result_str;
   goto __pyx_L0;
 
-  /* "pykubectl/wrapped.pyx":76
+  /* "pykubectl/wrapped.pyx":81
  * 
  * 
  * cpdef object pykubectl_create_impl(bytes options):             # <<<<<<<<<<<<<<
@@ -1774,7 +1858,7 @@ static PyObject *__pyx_f_9pykubectl_7wrapped_pykubectl_create_impl(PyObject *__p
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_7);
@@ -1783,6 +1867,8 @@ static PyObject *__pyx_f_9pykubectl_7wrapped_pykubectl_create_impl(PyObject *__p
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_message);
+  __Pyx_XDECREF(__pyx_v_ex);
+  __Pyx_XDECREF(__pyx_v_result_str);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
@@ -1794,7 +1880,7 @@ static PyObject *__pyx_pw_9pykubectl_7wrapped_3pykubectl_create_impl(PyObject *_
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("pykubectl_create_impl (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_options), (&PyBytes_Type), 1, "options", 1))) __PYX_ERR(0, 76, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_options), (&PyBytes_Type), 1, "options", 1))) __PYX_ERR(0, 81, __pyx_L1_error)
   __pyx_r = __pyx_pf_9pykubectl_7wrapped_2pykubectl_create_impl(__pyx_self, ((PyObject*)__pyx_v_options));
 
   /* function exit code */
@@ -1812,7 +1898,7 @@ static PyObject *__pyx_pf_9pykubectl_7wrapped_2pykubectl_create_impl(CYTHON_UNUS
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("pykubectl_create_impl", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_9pykubectl_7wrapped_pykubectl_create_impl(__pyx_v_options, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 76, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_9pykubectl_7wrapped_pykubectl_create_impl(__pyx_v_options, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 81, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -1887,14 +1973,14 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "pykubectl/wrapped.pyx":43
+  /* "pykubectl/wrapped.pyx":44
  * 
  *     while i < nelements:
  *         item = str(strings[i]).encode("utf-8")             # <<<<<<<<<<<<<<
  *         itemp = <char*>item
  *         string_size = <size_t>(len(item) + 1) * sizeof(char)
  */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_utf_8); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_utf_8); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
   __Pyx_RefNannyFinishContext();

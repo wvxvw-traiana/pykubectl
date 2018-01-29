@@ -46,3 +46,13 @@ void free_cstring_array(char** strings, size_t n) {
     }
     free(strings);
 }
+
+void free_resource_get(struct ResourceGet_return rgr) {
+    free(rgr.r0);
+    free(rgr.r1);
+}
+
+void free_create(struct Create_return cr) {
+    free(cr.r0);
+    free(cr.r1);
+}

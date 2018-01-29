@@ -21,7 +21,7 @@ import (
 )
 import "C"
 
-func errWithStack(original error) string {
+func errWithStack(original error) *C.char {
 	scanner := bufio.NewScanner(bytes.NewReader(debug.Stack()))
 	i := 0
 	lines := []string{original.Error()}
@@ -31,7 +31,7 @@ func errWithStack(original error) string {
 		}
 		i++
 	}
-	return strings.Join(lines, "\n")
+	return C.CString(strings.Join(lines, "\n"))
 }
 
 func translateFilenames(raw map[string]interface{}) kresource.FilenameOptions {
@@ -107,17 +107,18 @@ func translateCreateOptions(raw map[string]interface{}) *cmd.CreateOptions {
 }
 
 //export ResourceGet
-func ResourceGet(optsEncoded string, typeOrName []string) (res string, serr string) {
+func ResourceGet(optsEncoded string, typeOrName []string) (res *C.char, serr *C.char) {
 	defer func() {
 		if r := recover(); r != nil {
-			serr = fmt.Sprintf("%v\n%s", r, debug.Stack())
+			serr = C.CString(fmt.Sprintf("%v\n%s", r, debug.Stack()))
 		}
 	}()
+	empty := C.CString("")
 	opts := map[string]interface{}{}
 	fmt.Printf("Decoding: %v\n", optsEncoded)
 	fmt.Printf("Type or name: %v\n", typeOrName)
 	if err := json.Unmarshal([]byte(optsEncoded), &opts); err != nil {
-		return "", errWithStack(err)
+		return empty, errWithStack(err)
 	}
 	factory := cmdutil.NewFactory(nil)
 	options := translateGetOptions(opts)
@@ -136,17 +137,17 @@ func ResourceGet(optsEncoded string, typeOrName []string) (res string, serr stri
 		Flatten().
 		Do()
 	if err := result.Err(); err != nil {
-		return "", errWithStack(err)
+		return empty, errWithStack(err)
 	}
 	object, err := result.Object()
 	if err != nil {
-		return "", errWithStack(err)
+		return empty, errWithStack(err)
 	}
 	payload, err := json.Marshal(object)
 	if err != nil {
-		return "", errWithStack(err)
+		return empty, errWithStack(err)
 	}
-	return string(payload), ""
+	return C.CString(string(payload)), empty
 }
 
 func createAndRefresh(info *kresource.Info) error {
@@ -160,27 +161,28 @@ func createAndRefresh(info *kresource.Info) error {
 }
 
 //export Create
-func Create(optsEncoded string) (res string, serr string) {
+func Create(optsEncoded string) (res *C.char, serr *C.char) {
 	defer func() {
 		if r := recover(); r != nil {
-			serr = fmt.Sprintf("%v\n%s", r, debug.Stack())
+			serr = C.CString(fmt.Sprintf("%v\n%s", r, debug.Stack()))
 		}
 	}()
+	empty := C.CString("")
 	opts := map[string]interface{}{}
 	if err := json.Unmarshal([]byte(optsEncoded), &opts); err != nil {
-		return "", errWithStack(err)
+		return empty, errWithStack(err)
 	}
 	options := translateCreateOptions(opts)
 
 	factory := cmdutil.NewFactory(nil)
 	schema, err := factory.Validator(false)
 	if err != nil {
-		return "", errWithStack(err)
+		return empty, errWithStack(err)
 	}
 
 	cmdNamespace, enforceNamespace, err := factory.DefaultNamespace()
 	if err != nil {
-		return "", errWithStack(err)
+		return empty, errWithStack(err)
 	}
 
 	result := factory.NewBuilder().
@@ -193,7 +195,7 @@ func Create(optsEncoded string) (res string, serr string) {
 		Flatten().
 		Do()
 	if err = result.Err(); err != nil {
-		return "", errWithStack(err)
+		return empty, errWithStack(err)
 	}
 
 	// TODO(olegs): This doesn't come from otpions struct, rather from
@@ -205,6 +207,7 @@ func Create(optsEncoded string) (res string, serr string) {
 		if err != nil {
 			return err
 		}
+		// TODO(olegs): I don't really know what this "true" means
 		e := kubectl.CreateOrUpdateAnnotation(true, info, factory.JSONEncoder())
 		if e != nil {
 			return cmdutil.AddSourceToErr("creating", info.Source, err)
@@ -221,19 +224,19 @@ func Create(optsEncoded string) (res string, serr string) {
 	})
 
 	if err != nil {
-		return "", errWithStack(err)
+		return empty, errWithStack(err)
 	}
 
 	object, err := result.Object()
 	if err != nil {
-		return "", errWithStack(err)
+		return empty, errWithStack(err)
 	}
 
 	payload, err := json.Marshal(object)
 	if err != nil {
-		return "", errWithStack(err)
+		return empty, errWithStack(err)
 	}
-	return string(payload), ""
+	return C.CString(string(payload)), empty
 }
 
 func main() {}
