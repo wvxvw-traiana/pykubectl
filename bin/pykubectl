@@ -2,7 +2,26 @@
 # -*- coding: utf-8; mode: python -*-
 
 import pprint
-from pykubectl import kubectl_get
 
+from pykubectl import kubectl_get, kubectl_create
+from argparse import ArgumentParser
+
+
+parser = ArgumentParser(description='Script for testing kubectl bindings')
+actions = parser.add_mutually_exclusive_group(required=True)
+actions.add_argument(
+    '--get',
+    help='Get something',
+)
+actions.add_argument(
+    '--create',
+    help='Create from description',
+)
+
+args = parser.parse_args()
 pp = pprint.PrettyPrinter(indent=4)
-pp.pprint(kubectl_get(['pods']))
+
+if args.get:
+    pp.pprint(kubectl_get([args.get]))
+elif args.create:
+    pp.pprint(kubectl_create(filenames=[args.create]))

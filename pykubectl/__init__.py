@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from pykubectl.wrapped import pykubectl_get as kubectl_get
+from pykubectl.api import kubectl_get, kubectl_create
 
-__all__ = ['kubectl_get']
+__all__ = ['kubectl_get', 'kubectl_create']

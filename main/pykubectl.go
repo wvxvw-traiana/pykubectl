@@ -33,7 +33,7 @@ func errWithStack(original error) string {
 	return strings.Join(lines, "\n")
 }
 
-func translateGetOptions(raw map[string]interface{}) *resource.GetOptions {
+func translateFilenames(raw map[string]interface{}) kresource.FilenameOptions {
 	foptions := kresource.FilenameOptions{}
 
 	if fnames, ok := raw["filenames"]; ok {
@@ -42,8 +42,13 @@ func translateGetOptions(raw map[string]interface{}) *resource.GetOptions {
 	if recursive, ok := raw["recursive"]; ok {
 		foptions.Recursive = recursive.(bool)
 	}
+	return foptions
+}
+
+func translateGetOptions(raw map[string]interface{}) *resource.GetOptions {
+
 	result := &resource.GetOptions{
-		FilenameOptions: foptions,
+		FilenameOptions: translateFilenames(raw),
 	}
 	for k, v := range raw {
 		switch k {
@@ -79,7 +84,20 @@ func translateGetOptions(raw map[string]interface{}) *resource.GetOptions {
 }
 
 func translateCreateOptions(raw map[string]interface{}) *cmd.CreateOptions {
-	return &cmd.CreateOptions{}
+	result := &cmd.CreateOptions{
+		FilenameOptions: translateFilenames(raw),
+	}
+	for k, v := range raw {
+		switch k {
+		case "raw":
+			result.Raw = v.(string)
+		case "edit_before_create":
+			result.EditBeforeCreate = v.(bool)
+		case "selector":
+			result.Selector = v.(string)
+		}
+	}
+	return result
 }
 
 //export ResourceGet
