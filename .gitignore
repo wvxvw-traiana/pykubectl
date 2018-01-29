@@ -4,3 +4,5 @@
 /pykubectl.egg-info
 __pycache__
 *.so
+*.dll
+*.a

@@ -21,12 +21,17 @@ class BuildGo(build_py):
     Build Go bindings before building Python extension
     '''
 
+    gokubectl_package = 'github.com/wvxvw-traiana/pykubectl/main'
+
     def run(self):
         if self.stale_go():
             print('Fresh Go build')
             self.build_go()
         else:
             print('Using previously compiled Go library')
+        if self.stale_win_go():
+            print('Fresh Win Go build')
+            self.build_win_go()
         build_py.run(self)
 
     def stale_go(self):
@@ -35,7 +40,13 @@ class BuildGo(build_py):
         go_sources = list(str(f.resolve()) for f in go_package.rglob('*.go'))
         return newer_group(go_sources, installed_lib)
 
-    def build_go(self):
+    def stale_win_go(self):
+        existing_archive = 'pykubectl/lib/libgokubectl.dll'
+        go_package = pathlib.Path('main')
+        go_sources = list(str(f.resolve()) for f in go_package.rglob('*.go'))
+        return newer_group(go_sources, existing_archive)
+
+    def is_go_available(self):
         version = None
         refusal = 'Will not compile Go bindings'
         try:
@@ -43,35 +54,97 @@ class BuildGo(build_py):
         except subprocess.CalledProcessError:
             print('Didn\'t find Go compiler.')
             print(refusal)
-            return
+            return False
         match = re.search(br'go(\d+)\.(\d+)\.(\d+)', version)
         if match:
             version = tuple(map(int, match.group(1, 2, 3)))
         else:
             print('Unrecognized version of Go compiler: {}'.format(version))
             print(refusal)
-            return
+            return False
         req_version = 1, 9, 1
         if version < req_version:
             print('You need Go compiler version higher than: {}'.format(
                 req_version,
             ))
             print(refusal)
-            return
+            return False
+        return True
+
+    def is_gcc_available(self):
         try:
-            result = subprocess.check_output([
-                'go',
-                'build',
-                '-v',
-                '-buildmode=c-shared',
-                '-o',
-                'pykubectl/lib/libgokubectl.so',
-                'github.com/wvxvw-traiana/pykubectl/main',
+            subprocess.check_output([
+                'x86_64-w64-mingw32-gcc-win32', '--version'
             ])
-            print(result)
-        except subprocess.CalledProcessError as e:
-            print(e.stderr)
-            raise
+        except subprocess.CalledProcessError:
+            print('Didn\'t find GCC')
+            print('Will not compile Windows DLL')
+            return False
+        return True
+
+    def build_win_go(self):
+        if self.is_go_available() and self.is_gcc_available():
+            try:
+                args = [
+                    'go',
+                    'build',
+                    '-v',
+                    '-buildmode=c-archive',
+                    '-o',
+                    'pykubectl/lib/libgokubectl.a',
+                    self.gokubectl_package,
+                ]
+                env = dict(os.environ)
+                env.update({
+                    'GOOS': 'windows',
+                    'GOARCH': 'amd64',
+                    'CGO_ENABLED': '1',
+                    'CC': 'x86_64-w64-mingw32-gcc-win32',
+                })
+                proc = subprocess.Popen(args, env=env)
+                stdout, stderr = proc.communicate()
+                print(stdout)
+                if proc.returncode != 0:
+                    raise Exception('Go compilation failed:\n{}'.format(
+                        stderr
+                    ))
+            except subprocess.CalledProcessError as e:
+                print(e.stderr)
+                raise
+            try:
+                result = subprocess.check_output([
+                    'x86_64-w64-mingw32-gcc-win32',
+                    '-shared',
+                    '-pthread',
+                    '-o',
+                    'pykubectl/lib/gokubectl.dll',
+                    'pykubectl/lib/win_gokubectl.c',
+                    'pykubectl/lib/libgokubectl.a',
+                    '-lwinmm',
+                    '-lntdll',
+                    '-lws2_32',
+                ])
+                print(result)
+            except subprocess.CalledProcessError as e:
+                print(e.stderr)
+                raise
+
+    def build_go(self):
+        if self.is_go_available():
+            try:
+                result = subprocess.check_output([
+                    'go',
+                    'build',
+                    '-v',
+                    '-buildmode=c-shared',
+                    '-o',
+                    'pykubectl/lib/libgokubectl.so',
+                    self.gokubectl_package,
+                ])
+                print(result)
+            except subprocess.CalledProcessError as e:
+                print(e.stderr)
+                raise
 
 
 # def is_extension_file(name):
