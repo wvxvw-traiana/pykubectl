@@ -13,6 +13,7 @@ import (
 	//
 	// utilflag "k8s.io/apiserver/pkg/util/flag"
 
+	"k8s.io/kubernetes/pkg/kubectl"
 	"k8s.io/kubernetes/pkg/kubectl/cmd"
 	"k8s.io/kubernetes/pkg/kubectl/cmd/resource"
 	cmdutil "k8s.io/kubernetes/pkg/kubectl/cmd/util"
@@ -37,7 +38,12 @@ func translateFilenames(raw map[string]interface{}) kresource.FilenameOptions {
 	foptions := kresource.FilenameOptions{}
 
 	if fnames, ok := raw["filenames"]; ok {
-		foptions.Filenames = fnames.([]string)
+		rawNames := fnames.([]interface{})
+		names := make([]string, len(rawNames))
+		for i := 0; i < len(names); i++ {
+			names[i] = rawNames[i].(string)
+		}
+		foptions.Filenames = names
 	}
 	if recursive, ok := raw["recursive"]; ok {
 		foptions.Recursive = recursive.(bool)
@@ -143,6 +149,16 @@ func ResourceGet(optsEncoded string, typeOrName []string) (res string, serr stri
 	return string(payload), ""
 }
 
+func createAndRefresh(info *kresource.Info) error {
+	obj, err := kresource.NewHelper(info.Client, info.Mapping).
+		Create(info.Namespace, true, info.Object)
+	if err != nil {
+		return err
+	}
+	info.Refresh(obj, true)
+	return nil
+}
+
 //export Create
 func Create(optsEncoded string) (res string, serr string) {
 	defer func() {
@@ -180,64 +196,44 @@ func Create(optsEncoded string) (res string, serr string) {
 		return "", errWithStack(err)
 	}
 
+	// TODO(olegs): This doesn't come from otpions struct, rather from
+	// global command-line arguments, need to pass these somehow too.
+	dryRun := false
+
+	count := 0
+	err = result.Visit(func(info *kresource.Info, err error) error {
+		if err != nil {
+			return err
+		}
+		e := kubectl.CreateOrUpdateAnnotation(true, info, factory.JSONEncoder())
+		if e != nil {
+			return cmdutil.AddSourceToErr("creating", info.Source, err)
+		}
+
+		if !dryRun {
+			if e := createAndRefresh(info); e != nil {
+				return cmdutil.AddSourceToErr("creating", info.Source, e)
+			}
+		}
+
+		count++
+		return nil
+	})
+
+	if err != nil {
+		return "", errWithStack(err)
+	}
+
 	object, err := result.Object()
 	if err != nil {
 		return "", errWithStack(err)
 	}
+
 	payload, err := json.Marshal(object)
 	if err != nil {
 		return "", errWithStack(err)
 	}
 	return string(payload), ""
-
-	// count := 0
-	// err = r.Visit(func(info *resource.Info, err error) error {
-	// 	if err != nil {
-	// 		return err
-	// 	}
-	// 	err := kubectl.CreateOrUpdateAnnotation(
-	// 		cmdutil.GetFlagBool(cmd, cmdutil.ApplyAnnotationsFlag),
-	// 		info, f.JSONEncoder(),
-	// 	)
-	// 	if err != nil {
-	// 		return cmdutil.AddSourceToErr("creating", info.Source, err)
-	// 	}
-
-	// 	if cmdutil.ShouldRecord(cmd, info) {
-	// 		if err := cmdutil.RecordChangeCause(info.Object, f.Command(cmd, false)); err != nil {
-	// 			return cmdutil.AddSourceToErr("creating", info.Source, err)
-	// 		}
-	// 	}
-
-	// 	if !dryRun {
-	// 		if err := createAndRefresh(info); err != nil {
-	// 			return cmdutil.AddSourceToErr("creating", info.Source, err)
-	// 		}
-	// 	}
-
-	// 	count++
-
-	// 	shortOutput := output == "name"
-	// 	if len(output) > 0 && !shortOutput {
-	// 		return f.PrintResourceInfoForCommand(cmd, info, out)
-	// 	}
-	// 	if !shortOutput {
-	// 		f.PrintObjectSpecificMessage(info.Object, out)
-	// 	}
-
-	// 	f.PrintSuccess(mapper, shortOutput, out, info.Mapping.Resource, info.Name, dryRun, "created")
-	// 	return nil
-	// })
-
-	// if err != nil {
-	// 	return "", err.Error()
-	// }
-
-	// payload, err := json.Marshal(object)
-	// if err != nil {
-	// 	return "", err.Error()
-	// }
-	// return string(payload), ""
 }
 
 func main() {}

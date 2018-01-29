@@ -5,10 +5,12 @@ import os
 import re
 import shutil
 import subprocess
+import pathlib
 
 from Cython.Distutils import build_ext
 from setuptools import setup, Extension
 from setuptools.command.build_py import build_py
+from distutils.dep_util import newer_group
 
 
 LIB_DIR = '/usr/local/lib'
@@ -29,9 +31,9 @@ class BuildGo(build_py):
 
     def stale_go(self):
         installed_lib = os.path.join(LIB_DIR, 'libgokubectl.so')
-        return (not os.path.isfile(installed_lib)) or \
-            os.path.getmtime(installed_lib) < \
-            os.path.getmtime('main/pykubectl.go')
+        go_package = pathlib.Path('main')
+        go_sources = list(str(f.resolve()) for f in go_package.rglob('*.go'))
+        return newer_group(go_sources, installed_lib)
 
     def build_go(self):
         version = None
